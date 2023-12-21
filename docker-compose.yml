@@ -1,0 +1,20 @@
+version: '3'
+services:
+  projectFastAPI:
+    build: ./projectFastAPI
+    ports:
+      - '8002:8000'
+    image: projectfastapi-image
+
+  projectMQTTsub:
+    build: ./projectMQTTsub
+    image: projectmqttsub-image
+    depends_on:
+      - projectFastAPI
+
+  projectMQTTpub:
+    build: ./projectMQTTpub
+    image: projectmqttpub-image
+    depends_on:
+      - projectMQTTsub
+
